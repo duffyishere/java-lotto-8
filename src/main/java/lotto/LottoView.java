@@ -10,9 +10,13 @@ public class LottoView {
         System.out.println("구입금액을 입력해 주세요.");
         String inputValue = Console.readLine().trim();
         int purchaseAmount = parseInteger(inputValue);
+        validatePurchaseAmount(purchaseAmount);
+        return purchaseAmount;
+    }
+
+    private void validatePurchaseAmount(int purchaseAmount) {
         if (purchaseAmount % 1000 != 0)
             throw new IllegalArgumentException("[ERROR] 로또는 1000원 단위로만 입력 가능합니다.");
-        return purchaseAmount;
     }
 
     private int parseInteger(String inputValue) {
