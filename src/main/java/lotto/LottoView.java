@@ -8,11 +8,17 @@ import java.util.Map;
 
 public class LottoView {
     public int inputPurchaseAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
-        String inputValue = Console.readLine().trim();
-        int purchaseAmount = parseInteger(inputValue);
-        validatePurchaseAmount(purchaseAmount);
-        return purchaseAmount;
+        while (true) {
+            try {
+                System.out.println("구입금액을 입력해 주세요.");
+                String inputValue = Console.readLine().trim();
+                int purchaseAmount = parseInteger(inputValue);
+                validatePurchaseAmount(purchaseAmount);
+                return purchaseAmount;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private void validatePurchaseAmount(int purchaseAmount) {
@@ -24,21 +30,35 @@ public class LottoView {
         try {
             return Integer.parseInt(inputValue);
         } catch (NumberFormatException e) {
+            System.out.println("[ERROR]");
             throw new IllegalArgumentException("[ERROR] 구입금액은 숫자만 입력 가능합니다.");
         }
     }
 
     public Lotto inputWinningNumbers() {
-        System.out.println("당첨 번호를 입력해 주세요.");
-        String[] inputValues = Console.readLine().trim().split(",");
-        List<Integer> numbers = Arrays.stream(inputValues).map(Integer::parseInt).toList();
-        return new Lotto(numbers);
+        while (true) {
+            try {
+                System.out.println("당첨 번호를 입력해 주세요.");
+                String[] inputValues = Console.readLine().trim().split(",");
+                List<Integer> numbers = Arrays.stream(inputValues).map(Integer::parseInt).toList();
+                return new Lotto(numbers);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
     }
 
     public int inputBonusNumber() {
-        System.out.println("보너스 번호를 입력해 주세요.");
-        String inputValue = Console.readLine().trim();
-        return parseInteger(inputValue);
+        while (true) {
+            try {
+                System.out.println("보너스 번호를 입력해 주세요.");
+                String inputValue = Console.readLine().trim();
+                return parseInteger(inputValue);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public void printPurchasedLotto(List<Lotto> lottos) {

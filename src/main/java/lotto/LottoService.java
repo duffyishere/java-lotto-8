@@ -34,7 +34,6 @@ public class LottoService {
     private static Map<LottoRank, Integer> initResultMap() {
         Map<LottoRank, Integer> result = new LinkedHashMap<>();
         for (LottoRank rank : LottoRank.values()) {
-            if (rank == LottoRank.MISS) continue;
             result.put(rank, 0);
         }
         return result;
