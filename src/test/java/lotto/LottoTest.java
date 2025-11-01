@@ -43,6 +43,17 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("맞은 개수와 보너스 여부에 따라 Rank가 정확히 선택된다.")
+    @Test
+    void 당첨_등수_판단() {
+        assertThat(LottoRank.of(6, false)).isEqualTo(LottoRank.FIRST);
+        assertThat(LottoRank.of(5, true)).isEqualTo(LottoRank.SECOND);
+        assertThat(LottoRank.of(5, false)).isEqualTo(LottoRank.THIRD);
+        assertThat(LottoRank.of(4, false)).isEqualTo(LottoRank.FOURTH);
+        assertThat(LottoRank.of(3, false)).isEqualTo(LottoRank.FIFTH);
+        assertThat(LottoRank.of(2, false)).isEqualTo(LottoRank.MISS);
+    }
+
     @DisplayName("5등 1개에 해당할 경우 수익률은 정확히 62.5%이다.")
     @Test
     void 수익률_계산() {
