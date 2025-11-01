@@ -41,6 +41,12 @@ public class LottoView {
         return parseInteger(inputValue);
     }
 
+    public void printPurchasedLotto(List<Lotto> lottos) {
+        System.out.println(lottos.size() + "개를 구매했습니다.");
+        for (Lotto ticket : lottos) {
+            System.out.println(ticket.getNumbers());
+        }}
+
     public void printStatistics(Map<LottoRank, Integer> result, double profitRate) {
         System.out.println("당첨 통계");
         System.out.println("---");
