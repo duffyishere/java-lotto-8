@@ -3,6 +3,7 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +54,7 @@ class LottoTest {
                 LottoRank.FIFTH, 1,
                 LottoRank.MISS, 0
         );
-        int purchaseAmount = 8000;
+        BigDecimal purchaseAmount = new BigDecimal(8000);
 
         double profitRate = lottoService.calculateProfitRate(result, purchaseAmount);
 

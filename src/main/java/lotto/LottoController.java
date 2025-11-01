@@ -1,5 +1,6 @@
 package lotto;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ public class LottoController {
     }
 
     public void run() {
-        int purchaseAmount = lottoView.inputPurchaseAmount();
+        BigDecimal purchaseAmount = lottoView.inputPurchaseAmount();
         List<Lotto> lottos = lottoService.purchaseLotto(purchaseAmount);
         lottoView.printPurchasedLotto(lottos);
 

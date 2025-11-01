@@ -2,19 +2,20 @@ package lotto;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 public class LottoView {
-    public int inputPurchaseAmount() {
+    public BigDecimal inputPurchaseAmount() {
         while (true) {
             try {
                 System.out.println("구입금액을 입력해 주세요.");
                 String inputValue = Console.readLine().trim();
                 int purchaseAmount = parseInteger(inputValue);
                 validatePurchaseAmount(purchaseAmount);
-                return purchaseAmount;
+                return BigDecimal.valueOf(purchaseAmount);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

@@ -2,15 +2,18 @@ package lotto;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LottoService {
-    public List<Lotto> purchaseLotto(int amount) {
+    public List<Lotto> purchaseLotto(BigDecimal amount) {
+        int count = amount.divide(new BigDecimal(1000)).intValue();
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 1000; i <= amount; i += 1000) {
+        for (int i = 0; i <= count; i++) {
             lottos.add(generateLotto());
         }
         return lottos;
@@ -45,12 +48,17 @@ public class LottoService {
                 .count();
     }
 
-    public double calculateProfitRate(Map<LottoRank, Integer> result, int purchaseAmount) {
+    public double calculateProfitRate(Map<LottoRank, Integer> result, BigDecimal purchaseAmount) {
         long totalProfit = result.entrySet().stream()
                 .mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();
 
-        double profitRate = (double) totalProfit / purchaseAmount * 100;
-        return Math.round(profitRate * 10) / 10.0;
+        BigDecimal totalProfitDecimal = BigDecimal.valueOf(totalProfit);
+
+        BigDecimal profitRateDecimal = totalProfitDecimal.divide(purchaseAmount, 10, RoundingMode.HALF_UP)
+                .multiply(new BigDecimal(100))
+                .setScale(2, RoundingMode.HALF_UP);
+
+        return profitRateDecimal.doubleValue();
     }
 }
