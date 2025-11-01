@@ -45,4 +45,13 @@ public class LottoService {
                 .filter(lotto.getNumbers()::contains)
                 .count();
     }
+
+    public double calculateProfitRate(Map<LottoRank, Integer> result, int purchaseAmount) {
+        long totalProfit = result.entrySet().stream()
+                .mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
+                .sum();
+
+        double profitRate = (double) totalProfit / purchaseAmount * 100;
+        return Math.round(profitRate * 100) / 100.0;
+    }
 }
