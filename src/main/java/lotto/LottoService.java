@@ -13,7 +13,7 @@ public class LottoService {
     public List<Lotto> purchaseLotto(BigDecimal amount) {
         int count = amount.divide(new BigDecimal(1000)).intValue();
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i <= count; i++) {
+        for (int i = 0; i < count; i++) {
             lottos.add(generateLotto());
         }
         return lottos;
